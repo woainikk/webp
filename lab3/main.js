@@ -16,6 +16,7 @@ const ctx = canvas.getContext('2d'),
 
 // чтобы можно было скачать картинку по том по правилам Cross-Origin Resource Sharing
 img1.crossOrigin = 'anonymous';
+
 img1.src = path + '350x250';
 
 const data = JSON.parse(getQuote());
@@ -43,8 +44,7 @@ img1.onload = function () {
     };
 };
 
-
-
+// превращаем цитату в список, где один элемент-это строка
 function wrappedLines(ctx, text, maxWidth) {
     const words = text.split(" ");
     const lines = [];
@@ -74,7 +74,6 @@ function fillText() {
     const fontSize = 22;
     const textMargin = 5;
 
-
     const textLines = wrappedLines(ctx, data[0].quote, 600 * 0.9);
     const linesCount = textLines.length;
     const textHeight = (linesCount * fontSize) + ((linesCount - 1) * textMargin);
@@ -98,10 +97,9 @@ canvas.onclick = function () {
 };
 
 function getQuote() {
-
     const xhr = new XMLHttpRequest();
     xhr.open('GET', 'https://thesimpsonsquoteapi.glitch.me/quotes', false);
+    //запрашиваем цитату
     xhr.send();
     return xhr.responseText;
-
 }
